@@ -12,9 +12,15 @@
         try {
             $valor1 = $_POST['valor1'];
             $valor2 = $_POST['valor2'];
-            $div = $valor1 / $valor2;
-            echo "O Resultado da divisão é: $div";
-        }catch(Exception $e){
+            if ($valor1 and $valor2 != 0)
+            {
+              $div = $valor1 / $valor2;
+
+              echo "O Resultado da divisão é: $div";
+            }
+            else
+              echo "Não é possivel realizar divisão por zero.";
+            }catch(Exception $e){
             echo $e->getMessage();}
 
     }
