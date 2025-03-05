@@ -11,14 +11,13 @@
   if($_SERVER['REQUEST_METHOD']== 'POST'){
     try{
       
-
-      $numero1 = (int) $_POST["numero1"];
-      $numero2 = (int) $_POST["numero2"];
-      $numero3 = (int) $_POST["numero3"];
-      $numero4 = (int) $_POST["numero4"];
-      $numero5 = (int) $_POST["numero5"];
-      $numero6 = (int) $_POST["numero6"];
-      $numero7 = (int) $_POST["numero7"];
+      $numero1 = $_POST["numero1"];
+      $numero2 = $_POST["numero2"];
+      $numero3 = $_POST["numero3"];
+      $numero4 = $_POST["numero4"];
+      $numero5 = $_POST["numero5"];
+      $numero6 = $_POST["numero6"];
+      $numero7 = $_POST["numero7"];
 
       $menor = $numero1;
       $posicao = 1;
