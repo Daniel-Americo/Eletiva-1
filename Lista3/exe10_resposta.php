@@ -13,7 +13,7 @@
         $numero = $_POST['numero'];
         for($i = 1; $i <= 10; $i++){
             $calc = $numero * $i;
-            echo "$numero x $i = $calc </br>";
+            echo "$numero x $i = $calc </p>";
         }
       
     }catch(Exception $e){
