@@ -17,17 +17,11 @@
         echo "Letra A substituida por 4: ". str_replace("a", "4", $palavra);
         //primeiro o alvo da substituição e depois oq vai entrar no local
     }
-
-
-
+    
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
         try {
             $palavre = $_POST['palavra'];
-            manipularString($palavre);
-
-
-
-
+            manipularString(strtolower($palavre));
         }catch(Exception $e){
             echo $e->getMessage();}
 
