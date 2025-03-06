@@ -13,7 +13,7 @@
     <?php 
     //strlen é uma função propria do php q conta os carecteres
     function manipularString(string $palavra) : void {
-        echo "A palavra possui. " . strlen($palavra). " caracteres";
+        echo "A palavra possui. " . strlen($palavra). " caracteres</p>";
         echo "Letra A substituida por 4: ". str_replace("a", "4", $palavra);
         //primeiro o alvo da substituição e depois oq vai entrar no local
     }
