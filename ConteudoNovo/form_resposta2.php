@@ -14,14 +14,26 @@
     //strlen é uma função propria do php q conta os carecteres
     function manipularString(string $palavra) : void {
         echo "A palavra possui. " . strlen($palavra). " caracteres</p>";
-        echo "Letra A substituida por 4: ". str_replace("a", "4", $palavra);
+        echo "Letra A substituida por 4: ". str_replace("a", "4", $palavra)."</p>";
         //primeiro o alvo da substituição e depois oq vai entrar no local
     }
-    
+
+    function gerarValorAleatorio(int $inicial, int $final) : int {
+         return rand($inicial, $final); //rand = numeros randomicos entro o inicial e final.
+    }
+
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
         try {
             $palavre = $_POST['palavra'];
             manipularString(strtolower($palavre));
+
+            $valor = gerarValorAleatorio(1, 20);
+            echo "<p>O valor gerado foi: $valor </p>";
+
+            $numero = 3.55555555;
+            echo "<p> Mostrando 2 casas decimais: " .number_format($numero, 2, ",","."."</p> ");
+            //variavel, quantidade de casas decimais desejadas, Casa decimal, casa de milhar.
+
         }catch(Exception $e){
             echo $e->getMessage();}
 
