@@ -28,15 +28,15 @@
             echo "Abril";
             break;
         
-        Case 5:
+        case 5:
             echo "Maio";
             break;
         
-        Case 6:
+        case 6:
             echo "Junho";
             break;
         
-        Case 7:
+        case 7:
             echo "julho";
             break;
         
