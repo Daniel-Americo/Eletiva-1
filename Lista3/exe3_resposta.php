@@ -16,7 +16,7 @@
     if($valor1 > $valor2){
       echo "$valor2 $valor1";
     }
-    if($valor2 > $valor1){
+    elseif($valor2 > $valor1){
       echo "$valor1 $valor2";
     }
     elseif($valor1 == $valor2){
