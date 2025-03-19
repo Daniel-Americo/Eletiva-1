@@ -13,17 +13,31 @@
     <?php 
 
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
-        try {
-            $a = array();
-            $nome = $_POST['nome'];
-            $tel = $_POST['tel'];
+        try { 
+          $contato = array();
 
-            for($i =0; $i <5;$i++){
-                $posicao = $nome[i];
-                $a[posicao]= $tel[$i];
+          for($i =0; $i < count($_POST['nome']); $i ++){
+            $nome = $_POST['nome'][$i]; //obtemm o nome atual no indice
+            $tel = $_POST['tel'][$i]; //obtem o telefone atual no indice
 
+            if(array_key_exists($nome, $contato)){
+            echo "O nome $nome, já existe.";
+              continue; //se cair neste if, ele aparece o $nome duplicado e mostra na tela
+            }
+            elseif (in_array($tel, $contato)){
+              echo "<br>O Telefone $tel, já existe.";
+              continue;
             }
 
+          $contato[$nome] = $tel;
+          }
+          ksort($contato);
+
+          
+          echo "<ul>";
+          foreach ($contato as $nome => $tel) {
+            echo "<li>$nome: $tel</li>"; }
+          echo "</ul>";
 
         }catch(Exception $e){
             echo $e->getMessage();}
