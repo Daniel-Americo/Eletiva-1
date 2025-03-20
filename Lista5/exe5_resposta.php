@@ -27,7 +27,7 @@
             asort($estoque);
 
             foreach($estoque as $titulo => $quant){
-                echo "Titulo do livro: $titulo : Quantidade em estoque: $quant <br>";
+                echo "<strong>Titulo do livro:</strong> $titulo, <strong>Quantidade em estoque:</strong> $quant <br>";
             }
     
         }catch(Exception $e){
