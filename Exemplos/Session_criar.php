@@ -13,9 +13,13 @@
       //variavel $_SESSION É UM ARRAY DO SERVIDOR, gerenciados pelo servidor
       //toda vez q quiser armazenar o valor "permanente" usa session_start()
       //cria a posicao ['usuario'] ou qualquer outra e atribui o que quiser.
+      //os dados armazenados tem um tempo para ficarem armazenados definidos pelo servidor.
+      setcookie('usuaro', "joão", time() + 3600);
+      //define a chave/ o valor/ e o tempo que ficará armazenado
 
     ?>
     <h1>Bem Vindo <?= $_SESSION['usuario'] ?></h1>
+    <h2>Bem Vindo <?= $_COOKIE['usuario'] ?></h2>
 
 
  
