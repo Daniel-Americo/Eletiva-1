@@ -17,7 +17,7 @@
           $contato = array();
 
           for($i =0; $i < count($_POST['nome']); $i ++){
-            $nome = $_POST['nome'][$i]; //obtemm o nome atual no indice
+            $nome = strtoupper($_POST['nome'][$i]); //obtemm o nome atual no indice
             $tel = $_POST['tel'][$i]; //obtem o telefone atual no indice
 
             if(array_key_exists($nome, $contato)){
@@ -36,7 +36,7 @@
           
           echo "<ul>";
           foreach ($contato as $nome => $tel) {
-            echo "<li>$nome: $tel</li>"; }
+            echo "<li>Nome do Contato: $nome, Telefone: $tel</li>"; }
           echo "</ul>";
 
         }catch(Exception $e){
