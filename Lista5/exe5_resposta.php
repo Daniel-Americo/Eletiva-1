@@ -19,7 +19,7 @@
                 $titulo = $_POST['titulo'][$i];
                 $quant = (float)$_POST['quant'][$i];
                 if($quant < 5){
-                    echo "Alerta o livro:<strong> $titulo</strong>, Atingiu a Quantidade minima no estoque atingida<br>";
+                    echo "Alerta o livro:<strong> $titulo</strong>, Atingiu a Quantidade minima: $quant no estoque atingida<br>";
                     continue;
                 }
                 $estoque[$titulo]= $quant;
