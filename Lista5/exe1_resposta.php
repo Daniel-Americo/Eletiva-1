@@ -21,11 +21,11 @@
             $tel = $_POST['tel'][$i]; //obtem o telefone atual no indice
 
             if(array_key_exists($nome, $contato)){
-            echo "O nome $nome, já existe.";
+            echo "O nome: $nome, já existe.";
               continue; //se cair neste if, ele aparece o $nome duplicado e mostra na tela
             }
             elseif (in_array($tel, $contato)){
-              echo "<br>O Telefone $tel, já existe.";
+              echo "<br>O Telefone: $tel, já existe.";
               continue;
             }
 
