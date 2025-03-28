@@ -9,7 +9,8 @@
   <body class="container">
     <h1 class="mt-5">Sistema de pacote de controle de viagens</h1>
 
-    <?php 
+    <?php
+        require_once('conexao.php');
         session_start(); // Inicia a sessão
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             try{
@@ -65,6 +66,13 @@
                 <button type="submit" class="btn btn-primary mt-3">Acessar</button>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col"> 
+                Não possui acesso? clique <a href="novo_usuario.php"> aqui </a>
+            </div>
+        </div>
+        
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
