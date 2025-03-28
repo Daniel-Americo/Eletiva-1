@@ -17,8 +17,13 @@
                 $email = $_POST['email'];
                 $senha = $_POST['senha'];
 
-                if($email == "adm@adm.com" && $senha == "123"){
-                    $_SESSION['usuario'] = $email; // Armazena o email no usuário
+                $stmt = $pdo->prepare('SELECT * FROM usuarios where email = ?'); //recebe o email que vem pelo post
+                $stmt->execute([$email]);
+                $usuario = $stmt->fetch(PDO::FETCH_ASSOC); //variavel que busca no banco de dados o usuario
+
+
+                if($usuario && password_verify($senha, $usuario['senha'])){ //verifica se existe o usuario no banco de dados, e se a senha bate com o banco de dados.
+                    $_SESSION['usuario'] = $usuario['nome']; // Armazena o usuário
                     $_SESSION['acesso'] = true; // Acesso validado
                     header('Location: principal.php'); // Redireciona para o principal.php
                     exit; // Finaliza o script após o redirecionamento
@@ -72,7 +77,7 @@
                 Não possui acesso? clique <a href="novo_usuario.php"> aqui </a>
             </div>
         </div>
-        
+
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
