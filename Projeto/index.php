@@ -21,10 +21,10 @@
                 $stmt->execute([$email]);
                 $usuario = $stmt->fetch(PDO::FETCH_ASSOC); //variavel que busca no banco de dados o usuario
 
-
                 if($usuario && password_verify($senha, $usuario['senha'])){ //verifica se existe o usuario no banco de dados, e se a senha bate com o banco de dados.
                     $_SESSION['usuario'] = $usuario['nome']; // Armazena o usuário
                     $_SESSION['acesso'] = true; // Acesso validado
+                    $_SESSION['id'] = $usuario['id']; //nome no banco de dados
                     header('Location: principal.php'); // Redireciona para o principal.php
                     exit; // Finaliza o script após o redirecionamento
                 } else {

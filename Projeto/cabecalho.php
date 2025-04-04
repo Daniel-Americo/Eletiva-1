@@ -30,6 +30,9 @@
               <a class="nav-link" href="categorias.php">Categorias</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="alterar_dados.php">Alterar Dados</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link btn btn-danger" href="#" id="logoutButton">Sair</a>
             </li>
           </ul>
