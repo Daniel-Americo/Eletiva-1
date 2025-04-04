@@ -48,17 +48,17 @@
                     $sql = "UPDATE usuarios SET senha = ? WHERE id = ?";
                     $stmt = $pdo->prepare($sql);
                     $novaSenha = password_hash($novaSenha, PASSWORD_BCRYPT);
-                    
+
                     if($stmt->execute([$novaSenha, $_SESSION['id']])){
                         require("sair.php");
                     }
                     else{
-                        echo "<p class='text-danger'>Erro ao alterar senha!</p>";
+                        echo "<p> class='text-danger'>Erro ao alterar senha!</p>";
                     }
                 }
             }
             else {
-                echo "<p class='text-danger'>Senhas não conferem! </p>";
+                echo "<p> class='text-danger'>Senhas não conferem! </p>";
             }
                 
 
