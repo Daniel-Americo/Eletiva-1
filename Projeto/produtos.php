@@ -18,7 +18,7 @@
                 <td>Exemplo</td><td>Exemplo</td><td>Exemplo</td>
                 <td>
                     <a href="editar_produto.php" class="btn btn-warning">Editar</a>
-                    <a href="#" class="btn btn-info">Consultar</a>
+                    <a href="consultar_produto.php" class="btn btn-info">Consultar</a>
                 </td>
             </tr>
         
