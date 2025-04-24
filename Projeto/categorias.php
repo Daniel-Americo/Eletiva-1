@@ -20,7 +20,7 @@
 
 <h2>Categorias</h2>
     <a href="#" class="btn btn-success mb-3">Novo Registro</a>
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped" id="tabela">
         <thead>
             <tr>
                 <th>ID</th>
