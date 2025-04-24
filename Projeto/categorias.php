@@ -19,7 +19,19 @@
 
 
 <h2>Categorias</h2>
-    <a href="#" class="btn btn-success mb-3">Novo Registro</a>
+    <a href="nova_categoria.php" class="btn btn-success mb-3">Novo Registro</a>
+
+    <?php
+        if (isset($_GET['cadastro']) && $_GET['cadastro'] == true) 
+        {
+            echo '<p class="text-success">Registro Salvo com sucesso! </p>';
+
+        }elseif (isset($_GET['cadastro']) && $_GET['cadastro'] == false)
+        {
+            echo '<p class="text-danger">Erro ao Inserir o Registro! </p>';
+        }
+    ?>
+
     <table class="table table-hover table-striped" id="tabela">
         <thead>
             <tr>
