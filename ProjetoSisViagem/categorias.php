@@ -19,8 +19,20 @@
 
 
 <h2>Categorias</h2>
-    <a href="#" class="btn btn-success mb-3">Novo Registro</a>
-    <table class="table table-hover table-striped">
+    <a href="nova_categoria.php" class="btn btn-success mb-3">Novo Registro</a>
+
+    <?php
+        if (isset($_GET['cadastro']) && $_GET['cadastro'] == true) 
+        {
+            echo '<p class="text-success">Registro Salvo com sucesso! </p>';
+
+        }elseif (isset($_GET['cadastro']) && $_GET['cadastro'] == false)
+        {
+            echo '<p class="text-danger">Erro ao Inserir o Registro! </p>';
+        }
+    ?>
+
+    <table class="table table-hover table-striped" id="tabela">
         <thead>
             <tr>
                 <th>ID</th>
@@ -36,8 +48,8 @@
                     <td><?= $c['id'] ?></td>
                     <td><?= $c['nome'] ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning">Editar</a>
-                        <a href="#" class="btn btn-info">Consultar</a>
+                        <a href="editar_categoria.php?id=<?= $c['id'] ?>" class="btn btn-warning">Editar</a>
+                        <a href="consultar_categoria.php?id=<?= $c['id'] ?>" class="btn btn-info">Consultar</a>
                     </td>
                 </tr>
             <?php 
