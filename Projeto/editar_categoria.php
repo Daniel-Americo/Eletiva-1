@@ -26,9 +26,9 @@
             $sql ="UPDATE categoria SET  nome = ?, descricao = ? WHERE id = ?";
             $stmt = $pdo->prepare($sql);
             if($stmt->execute([$nome, $descricao, $id])){
-                header('location: categorias.php?cadastro=true'); 
+                header('location: categorias.php?edicao=true'); 
             } else{
-                header('location: categorias.php?cadastro=false');
+                header('location: categorias.php?edicao=false');
             }
 
         }catch(Exception $e){

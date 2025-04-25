@@ -30,6 +30,24 @@
         {
             echo '<p class="text-danger">Erro ao Inserir o Registro! </p>';
         }
+
+        if (isset($_GET['edicao']) && $_GET['edicao'] == true) 
+        {
+            echo '<p class="text-success">Registro alterado com sucesso! </p>';
+
+        }elseif (isset($_GET['edicao']) && $_GET['edicao'] == false)
+        {
+            echo '<p class="text-danger">Erro ao alterar o Registro! </p>';
+        }
+
+        if (isset($_GET['exclusao']) && $_GET['exclusao'] == true) 
+        {
+            echo '<p class="text-success">Registro Salvo com sucesso! </p>';
+
+        }elseif (isset($_GET['exclusao']) && $_GET['exclusao'] == false)
+        {
+            echo '<p class="text-danger">Erro ao Inserir o Registro! </p>';
+        }
     ?>
 
     <table class="table table-hover table-striped" id="tabela">
