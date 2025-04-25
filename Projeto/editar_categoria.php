@@ -23,7 +23,7 @@
     function alterarcategoria($nome, $descricao, $id){ //função de inserir nova categoria
         require("conexao.php");
         try{
-            $sql ="INSERT INTO categoria (nome, descricao) VALUES (?, ?)";
+            $sql ="UPDATE categoria SET  nome = ?, descricao = ? WHERE id = ?";
             $stmt = $pdo->prepare($sql);
             if($stmt->execute([$nome, $descricao, $id])){
                 header('location: categorias.php?cadastro=true'); 
