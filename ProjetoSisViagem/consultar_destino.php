@@ -1,16 +1,16 @@
 <?php
     require_once("cabecalho.php");
 ?>
-    <h2>Consultar Produto </h2>
+    <h2>Consultar Destino </h2>
 
     <div class="mb-2">
-        <p>Nome do Produto: <strong>Produto 1</strong></p>
+        <p>Nome do Destino: <strong>Destino 1</strong></p>
     </div>
     <div class="mb-2">
-        <p>Descrição do Produto: <strong>Produto 1</strong></p>
+        <p>Nome do Destino: <strong>Destino 3</strong></p>
     </div>
     <div class="mb-2">
-        <p>Valor do Produto: <strong>Produto 1</strong></p>
+        <p>Nome do Destino: <strong>Destino 3</strong></p>
     </div>
 
     <div class="mb-2">
