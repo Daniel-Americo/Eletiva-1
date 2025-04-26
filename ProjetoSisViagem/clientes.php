@@ -4,8 +4,8 @@
     function retornaClientes() {
         require("conexao.php");
         try {
-            $sql = "SELECT * FROM clientes"; // Busca todos os clientes
-            $stmt = $pdo->query($sql);
+            $sql = "SELECT * FROM clientes";
+            $stmt = $pdo->query($sql); // Busca todos os clientes
             return $stmt->fetchAll(); // Retorna os clientes em formato de array
         } catch (Exception $e) {
             die("Erro ao consultar os clientes: " . $e->getMessage());
@@ -16,9 +16,9 @@
 ?>
 
 <h2>Clientes</h2>
-<a href="novo_cliente.php" class="btn btn-success mb-3">Novo Registro</a>
+<a href="novo_cliente.php" class="btn btn-success mb-3">Novo Cliente</a>
 
-<table class="table table-hover table-striped" id="tabela">
+<table class="table table-hover table-striped">
     <thead>
         <tr>
             <th>ID</th>
@@ -39,7 +39,7 @@
                 <td><?= $c['tel'] ?></td>
                 <td><?= $c['CPF'] ?></td>
                 <td><?= $c['Rg'] ?></td>
-                <td><?= $c['datanascimento'] ?></td>
+                <td><?= date("d/m/Y", strtotime($c['datanascimento'])) ?></td>
                 <td><?= $c['email'] ?></td>
                 <td>
                     <a href="editar_cliente.php?id=<?= $c['idclientes'] ?>" class="btn btn-warning">Editar</a>

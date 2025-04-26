@@ -16,7 +16,7 @@
 ?>
 
 <h2>Destinos</h2>
-<a href="novo_destino.php" class="btn btn-success mb-3">Novo Registro</a>
+<a href="novo_destino.php" class="btn btn-success mb-3">Novo Destino</a>
 
 <table class="table table-hover table-striped">
     <thead>
