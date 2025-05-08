@@ -1,13 +1,14 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para inserir um novo pacote turístico
-    function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes) {
+    // Função para inserir um novo pacote turístico (sem o ID do cliente)
+    function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino) {
         require("conexao.php");
         try {
-            $sql = "INSERT INTO pacotes (data_inicio, fim_pacote, valor, destino_id_destino, clientes_clientes) VALUES (?, ?, ?, ?, ?)";
+            // Atualize a query para não incluir a coluna clientes_clientes
+            $sql = "INSERT INTO pacotes (data_inicio, fim_pacote, valor, destino_id_destino) VALUES (?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes])) {
+            if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino])) {
                 header('location: pacotes.php?cadastro=true'); // Redireciona em caso de sucesso
             } else {
                 header('location: pacotes.php?cadastro=false'); // Redireciona em caso de erro
@@ -22,12 +23,10 @@
         // Recebe as datas no formato padrão (YYYY-MM-DD) do campo tipo date
         $data_inicio = $_POST['data_inicio'];
         $fim_pacote = $_POST['fim_pacote'];
-
         $valor = $_POST['valor'];
         $destino_id_destino = $_POST['destino_id_destino'];
-        $clientes_clientes = $_POST['clientes_clientes'];
 
-        inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes);
+        inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino);
     }
 ?>
 
@@ -52,11 +51,6 @@
     <div class="mb-3">
         <label for="destino_id_destino" class="form-label">ID do Destino</label>
         <input type="number" id="destino_id_destino" name="destino_id_destino" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="clientes_clientes" class="form-label">ID do Cliente</label>
-        <input type="number" id="clientes_clientes" name="clientes_clientes" class="form-control" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>

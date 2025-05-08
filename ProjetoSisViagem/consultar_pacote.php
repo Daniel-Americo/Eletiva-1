@@ -57,7 +57,7 @@
         <p>Fim do Pacote: <strong><?= $pacote['fim_pacote'] ?></strong></p>
         <p>Valor: <strong>R$ <?= number_format($pacote['valor'], 2, ',', '.') ?></strong></p>
         <p>ID do Destino: <strong><?= $pacote['destino_id_destino'] ?></strong></p>
-        <p>ID do Cliente: <strong><?= $pacote['clientes_clientes'] ?></strong></p>
+        <!-- Linha referente ao ID do Cliente removida -->
         <div style="display: flex; gap: 10px; align-items: center;">
             <form method="post" style="margin: 0;">
                 <input type="hidden" name="id_pacote" value="<?= $pacote['idpacotes'] ?>">

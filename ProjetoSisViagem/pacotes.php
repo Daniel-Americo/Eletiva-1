@@ -47,7 +47,6 @@
             <th>Data Fim</th>
             <th>Valor</th>
             <th>Destino ID</th>
-            <th>Cliente ID</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -59,7 +58,6 @@
                 <td><?= date("d/m/Y", strtotime($p['fim_pacote'])) ?></td>
                 <td><?= number_format($p['valor'], 2, ',', '.') ?></td>
                 <td><?= $p['destino_id_destino'] ?></td>
-                <td><?= $p['clientes_clientes'] ?></td>
                 <td>
                     <a href="editar_pacote.php?id=<?= $p['idpacotes'] ?>" class="btn btn-warning">Editar</a>
                     <a href="consultar_pacote.php?id=<?= $p['idpacotes'] ?>" class="btn btn-info">Consultar</a>

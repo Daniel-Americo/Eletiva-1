@@ -1,9 +1,9 @@
 <?php
-    require_once("cabecalho.php"); // Incluindo o cabeçalho
-    require("conexao.php"); // Incluindo a conexão com o banco
+    require_once("cabecalho.php");
 
+    // Função para consultar um pacote pelo ID
     function consultaPacote($id) {
-        require("conexao.php"); // Adiciona a conexão com banco de dados
+        require("conexao.php"); // Inclui a conexão com o banco de dados
         try {
             $sql = "SELECT * FROM pacotes WHERE idpacotes = ?";
             $stmt = $pdo->prepare($sql);
@@ -19,12 +19,13 @@
         }
     }
 
-    function alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes, $id) {
+    // Função para alterar um pacote (removido o campo clientes_clientes)
+    function alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $id) {
         require("conexao.php");
         try {
-            $sql = "UPDATE pacotes SET data_inicio = ?, fim_pacote = ?, valor = ?, destino_id_destino = ?, clientes_clientes = ? WHERE idpacotes = ?";
+            $sql = "UPDATE pacotes SET data_inicio = ?, fim_pacote = ?, valor = ?, destino_id_destino = ? WHERE idpacotes = ?";
             $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes, $id])) {
+            if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino, $id])) {
                 header('location: pacotes.php?edicao=true');
             } else {
                 header('location: pacotes.php?edicao=false');
@@ -34,16 +35,15 @@
         }
     }
 
-    // Verifica se o formulário foi enviado
+    // Verifica se o formulário foi enviado para alterar o pacote
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $data_inicio = $_POST['data_inicio'];
         $fim_pacote = $_POST['fim_pacote'];
         $valor = $_POST['valor'];
         $destino_id_destino = $_POST['destino_id_destino'];
-        $clientes_clientes = $_POST['clientes_clientes'];
         $id = $_POST['id'];
 
-        alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $clientes_clientes, $id); // Chamada do método passando os valores
+        alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $id); // Chama a função com os valores do formulário
     } else {
         $pacote = consultaPacote($_GET['id']); // Consulta o pacote com base no ID recebido via GET
     }
@@ -53,7 +53,7 @@
 
 <form method="post">
 
-    <!-- Campo Oculto para o ID do Pacote -->
+    <!-- Campo oculto para o ID do Pacote -->
     <input type="hidden" name="id" value="<?= $pacote['idpacotes'] ?>">
 
     <div class="mb-3">
@@ -76,10 +76,7 @@
         <input type="number" id="destino_id_destino" name="destino_id_destino" class="form-control" value="<?= $pacote['destino_id_destino'] ?>" required>
     </div>
 
-    <div class="mb-3">
-        <label for="clientes_clientes" class="form-label">ID do Cliente</label>
-        <input type="number" id="clientes_clientes" name="clientes_clientes" class="form-control" value="<?= $pacote['clientes_clientes'] ?>" required>
-    </div>
+    <!-- Campo referente ao "ID do Cliente" foi removido -->
 
     <button type="submit" class="btn btn-primary">Salvar</button>
     <button type="button" class="btn btn-secondary" onclick="history.back();">Voltar</button>
@@ -87,5 +84,5 @@
 </form>
 
 <?php
-    require_once("rodape.php"); // Incluindo o rodapé
+    require_once("rodape.php");
 ?>
