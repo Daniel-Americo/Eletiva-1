@@ -4,9 +4,9 @@
     function retornaVendas() {
         require("conexao.php");
         try {
-            $sql = "SELECT * FROM Vendas";
+            $sql = "SELECT id_vendas, data_contratacao, status_reserva, pacotes_idpacotes FROM Vendas";
             $stmt = $pdo->query($sql);
-            return $stmt->fetchAll(); // Retorna os registros
+            return $stmt->fetchAll();
         } catch (Exception $e) {
             die("Erro ao consultar as vendas: " . $e->getMessage());
         }
@@ -16,29 +16,23 @@
 ?>
 
 <h2>Vendas</h2>
-<a href="nova_venda.php" class="btn btn-success mb-3">Nova Venda</a>
 
 <table class="table table-hover table-striped">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>ID Venda</th>
             <th>Data Contratação</th>
             <th>Status da Reserva</th>
             <th>ID do Pacote</th>
-            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($vendas as $v): ?>
             <tr>
                 <td><?= $v['id_vendas'] ?></td>
-                <td><?= $v['data_contratacao'] ?></td>
+                <td><?= date("d/m/Y", strtotime($v['data_contratacao'])) ?></td>
                 <td><?= $v['status_reserva'] ?></td>
                 <td><?= $v['pacotes_idpacotes'] ?></td>
-                <td>
-                    <a href="editar_venda.php?id=<?= $v['id_vendas'] ?>" class="btn btn-warning">Editar</a>
-                    <a href="consultar_venda.php?id=<?= $v['id_vendas'] ?>" class="btn btn-info">Consultar</a>
-                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>

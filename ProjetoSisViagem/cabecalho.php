@@ -34,7 +34,7 @@
               <a class="nav-link" href="clientes.php">Clientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="clientes.php">Vendas</a>
+              <a class="nav-link" href="vendas.php">Vendas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="alterar_dados.php">Alterar Dados</a>
