@@ -1,33 +1,33 @@
 <?php
-    require_once("cabecalho.php");
+require_once("cabecalho.php");
 
-    // Função para inserir um novo pacote turístico (sem o ID do cliente)
-    function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino) {
-        require("conexao.php");
-        try {
-            // Atualize a query para não incluir a coluna clientes_clientes
-            $sql = "INSERT INTO pacotes (data_inicio, fim_pacote, valor, destino_id_destino) VALUES (?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino])) {
-                header('location: pacotes.php?cadastro=true'); // Redireciona em caso de sucesso
-            } else {
-                header('location: pacotes.php?cadastro=false'); // Redireciona em caso de erro
-            }
-        } catch (Exception $e) {
-            die("Erro ao inserir pacote: " . $e->getMessage());
+// Função para inserir um novo pacote turístico (sem cliente)
+function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino) {
+    require("conexao.php");
+    try {
+        // Inserção sem clientes_clientes
+        $sql = "INSERT INTO pacotes (data_inicio, fim_pacote, valor, destino_id_destino) 
+                VALUES (?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        if ($stmt->execute([$data_inicio, $fim_pacote, $valor, $destino_id_destino])) {
+            header('location: pacotes.php?cadastro=true');
+        } else {
+            header('location: pacotes.php?cadastro=false');
         }
+    } catch (Exception $e) {
+        die("Erro ao inserir pacote: " . $e->getMessage());
     }
+}
 
-    // Verifica se o formulário foi enviado
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        // Recebe as datas no formato padrão (YYYY-MM-DD) do campo tipo date
-        $data_inicio = $_POST['data_inicio'];
-        $fim_pacote = $_POST['fim_pacote'];
-        $valor = $_POST['valor'];
-        $destino_id_destino = $_POST['destino_id_destino'];
+// Verifica se o formulário foi enviado
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $data_inicio = $_POST['data_inicio'];
+    $fim_pacote = $_POST['fim_pacote'];
+    $valor = $_POST['valor'];
+    $destino_id_destino = $_POST['destino_id_destino'];
 
-        inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino);
-    }
+    inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino);
+}
 ?>
 
 <h2>Novo Pacote</h2>
@@ -58,5 +58,5 @@
 </form>
 
 <?php
-    require_once("rodape.php");
+require_once("rodape.php");
 ?>
