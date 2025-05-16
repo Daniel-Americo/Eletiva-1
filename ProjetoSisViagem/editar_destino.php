@@ -81,5 +81,5 @@
 </form>
 
 <?php
-    require_once("rodape.php"); // Incluindo o rodapé
+    require_once("rodape.php"); 
 ?>
