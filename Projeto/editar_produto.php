@@ -28,12 +28,12 @@
         }
     }
 
-    function alterarProduto($nome, $descricao, $valor, $categoria, $id){
+    function alterarProduto($nome, $descricao, $preco, $categoria, $id){
         require("conexao.php");
         try {
-            $sql = "UPDATE produto SET nome=?, descricao = ?, valor = ?, categoria_id = ? where id = ?";
+            $sql = "UPDATE produto SET nome=?, descricao = ?, preco = ?, categoria_id = ? where id = ?";
             $stmt = $pdo->prepare($sql);
-            if ($stmt->execute ([$nome, $descricao, $valor, $categoria, $id]))
+            if ($stmt->execute ([$nome, $descricao, $preco, $categoria, $id]))
                 header('location: produtos.php?edicao=true');  
             else
             header('location: produtos.php?edicao=false');
@@ -43,9 +43,9 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $id = $_POST['id'];
             $nome = $_POST['nome'];
-            $valor = $_POST['valor'];
+            $preco = $_POST['preco'];
             $categoria = $_POST['categoria'];
-            alterarProduto($nome, $valor, $descricao, $id, $categoria);
+            alterarProduto($nome, $preco, $descricao, $id, $categoria);
         } 
         else {
             $categorias = retornaCateorias();
@@ -68,8 +68,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="valor" class="form-label">Valor</label>
-        <input value="<?= $produto['valor']?>" type="number" id="valor" name="valor" class="form-control" required="">
+        <label for="preco" class="form-label">preco</label>
+        <input value="<?= $produto['preco']?>" type="number" id="preco" name="preco" class="form-control" required="">
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar</button>
