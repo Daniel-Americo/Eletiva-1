@@ -46,6 +46,10 @@
             $valor = $_POST['valor'];
             $categoria = $_POST['categoria'];
             alterarProduto($nome, $valor, $descricao, $id, $categoria);
+        } 
+        else {
+            $categorias = retornaCateorias();
+            $produto = retornaProduto($_GET['id']);
         }
     }
 ?>
