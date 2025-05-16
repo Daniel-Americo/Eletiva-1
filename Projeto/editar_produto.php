@@ -1,5 +1,53 @@
 <?php
     require_once("cabecalho.php"); // Incluindo o cabeçalho
+
+    function retornaCateorias(){
+        require("conexao.php");
+        try {
+            $sql = "SELECT * FROM categoria";
+            $stmt = $pdo->query($sql);
+            return $stmt->fetchall();
+        }catch (exception $e){
+            die ("Erro ao consultar categorias: ". $e->getMessage());
+        }
+    }
+
+    function retornaProduto($id){
+        require("conexao.php");
+        try {
+            $sql = "SELECT * FROM produto WHERE id=?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id']);
+            $produto = $stmt->fetch();
+            if(!$produto)
+                die("Erro ao Retornar o produto!!!");
+            else
+                return $produto;
+        }catch (exception $e) {
+            die ("Erro ao consultar o produto: ". $e->getMessage());
+        }
+    }
+
+    function alterarProduto($nome, $descricao, $valor, $categoria, $id){
+        require("conexao.php");
+        try {
+            $sql = "UPDATE produto SET nome=?, descricao = ?, valor = ?, categoria_id = ? where id = ?";
+            $stmt = $pdo->prepare($sql);
+            if ($stmt->execute ([$nome, $descricao, $valor, $categoria, $id]))
+                header('location: produtos.php?edicao=true');  
+            else
+            header('location: produtos.php?edicao=false');
+        }catch(exception $e) {
+            die("Erro ao alterar produto: ". $e->getMessage());
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $_POST['id'];
+            $nome = $_POST['nome'];
+            $valor = $_POST['valor'];
+            $categoria = $_POST['categoria'];
+            alterarProduto($nome, $valor, $descricao, $id, $categoria);
+        }
+    }
 ?>
 
 <h2>Editar Produto</h2>
