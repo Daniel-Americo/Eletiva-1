@@ -2,9 +2,9 @@
     require_once("cabecalho.php");
 
     function retornaVendasComDetalhes() {
-        require("conexao.php"); // Certifique-se de que conexao.php está configurado corretamente
+        require("conexao.php"); 
         try {
-            // Consulta SQL que faz JOIN com as tabelas clientes, pacotes e destinos
+
             $sql = "SELECT
                         v.id_vendas,
                         v.data_contratacao,
@@ -24,9 +24,9 @@
                     JOIN
                         destinos d ON p.destino_id_destino = d.id_destinos
                     ORDER BY
-                        v.data_contratacao DESC"; // Ordena as vendas pela data mais recente
+                        v.data_contratacao DESC"; 
             $stmt = $pdo->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna os registros como array associativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
         } catch (Exception $e) {
             die("Erro ao consultar as vendas com detalhes: " . $e->getMessage());
         }

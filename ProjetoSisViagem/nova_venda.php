@@ -1,7 +1,7 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para buscar todos os clientes para o dropdown
+
     function retornaClientes() {
         require("conexao.php");
         try {
@@ -13,11 +13,10 @@
         }
     }
 
-    // Função para buscar todos os pacotes para o dropdown
+
     function retornaPacotes() {
         require("conexao.php");
         try {
-            // Inclui informações do destino para facilitar a identificação do pacote
             $sql = "SELECT
                         p.idpacotes,
                         p.valor,
@@ -36,7 +35,7 @@
         }
     }
 
-    // Função para inserir uma nova venda no banco de dados
+
     function inserirVenda($data_contratacao, $status_reserva, $pacotes_idpacotes, $clientes_idclientes) {
         require("conexao.php");
         try {
@@ -44,8 +43,8 @@
             $stmt = $pdo->prepare($sql);
 
             if ($stmt->execute([$data_contratacao, $status_reserva, $pacotes_idpacotes, $clientes_idclientes])) {
-                header('location: vendas.php?cadastro=true'); // Redireciona para a lista de vendas
-                exit(); // É crucial usar exit() após header()
+                header('location: vendas.php?cadastro=true'); 
+                exit(); 
             } else {
                 header('location: vendas.php?cadastro=false');
                 exit();
@@ -55,16 +54,16 @@
         }
     }
 
-    // Carrega clientes e pacotes antes de exibir o formulário
+
     $clientes = retornaClientes();
     $pacotes = retornaPacotes();
 
-    // Verifica se o formulário foi enviado com o método POST
+
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $data_contratacao = $_POST['data_contratacao'];
         $status_reserva = $_POST['status_reserva'];
-        $pacotes_idpacotes = $_POST['id_pacote']; // Nome do campo do formulário
-        $clientes_idclientes = $_POST['id_cliente']; // Nome do campo do formulário
+        $pacotes_idpacotes = $_POST['id_pacote']; 
+        $clientes_idclientes = $_POST['id_cliente']; 
 
         inserirVenda($data_contratacao, $status_reserva, $pacotes_idpacotes, $clientes_idclientes);
     }
