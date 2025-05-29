@@ -1,15 +1,15 @@
 <?php
-    require_once("cabecalho.php"); // Incluindo o cabeçalho
-    require("conexao.php"); // Incluindo a conexão com o banco
+    require_once("cabecalho.php"); 
+    require("conexao.php"); 
 
-    // Verifica se o ID do destino foi passado via GET
+    
     if (!isset($_GET['id'])) {
         die("Erro: ID do destino não foi fornecido.");
     }
 
-    $id = $_GET['id']; // ID do destino recebido via GET
+    $id = $_GET['id']; 
 
-    // Função para buscar os dados do destino
+    
     function retornaDestino($id) {
         require("conexao.php");
         try {
@@ -28,7 +28,7 @@
         }
     }
 
-    // Função para salvar as alterações no banco
+    
     function alterarDestino($id, $estado, $cidade, $pais) {
         require("conexao.php");
         try {
@@ -45,7 +45,7 @@
         }
     }
 
-    // Verifica se o formulário foi enviado
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $estado = $_POST['estado'];
         $cidade = $_POST['cidade'];
@@ -54,7 +54,7 @@
         alterarDestino($id, $estado, $cidade, $pais);
     }
 
-    // Busca os dados do destino
+    
     $destino = retornaDestino($id);
 ?>
 

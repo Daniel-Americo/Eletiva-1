@@ -1,7 +1,7 @@
 <?php
 require_once("cabecalho.php");
 
-// Função para inserir um novo pacote turístico (sem cliente)
+
 function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino) {
     require("conexao.php");
     try {
@@ -19,7 +19,7 @@ function inserirPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino) {
     }
 }
 
-// Verifica se o formulário foi enviado
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data_inicio = $_POST['data_inicio'];
     $fim_pacote = $_POST['fim_pacote'];

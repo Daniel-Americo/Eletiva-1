@@ -1,23 +1,23 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para inserir um novo destino no banco de dados
+    
     function inserirDestino($estado, $cidade, $pais) {
         require("conexao.php");
         try {
             $sql = "INSERT INTO destinos (estado, cidade, pais) VALUES (?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             if ($stmt->execute([$estado, $cidade, $pais])) {
-                header('location: destinos.php?cadastro=true'); // Redireciona em caso de sucesso
+                header('location: destinos.php?cadastro=true'); 
             } else {
-                header('location: destinos.php?cadastro=false'); // Redireciona em caso de erro
+                header('location: destinos.php?cadastro=false'); 
             }
         } catch (Exception $e) {
             die("Erro ao inserir destino: " . $e->getMessage());
         }
     }
 
-    // Verifica se o formulário foi enviado
+ 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $estado = $_POST['estado'];
         $cidade = $_POST['cidade'];

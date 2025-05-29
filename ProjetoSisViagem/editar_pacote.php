@@ -1,14 +1,14 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para consultar um pacote pelo ID
+    
     function consultaPacote($id) {
-        require("conexao.php"); // Inclui a conexão com o banco de dados
+        require("conexao.php"); 
         try {
             $sql = "SELECT * FROM pacotes WHERE idpacotes = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$id]);
-            $pacote = $stmt->fetch(PDO::FETCH_ASSOC); // Transforma os dados em um array
+            $pacote = $stmt->fetch(PDO::FETCH_ASSOC); 
             if (!$pacote) {
                 die("Erro ao Consultar o Registro!");
             } else {
@@ -19,7 +19,6 @@
         }
     }
 
-    // Função para alterar um pacote (removido o campo clientes_clientes)
     function alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $id) {
         require("conexao.php");
         try {
@@ -35,7 +34,7 @@
         }
     }
 
-    // Verifica se o formulário foi enviado para alterar o pacote
+    
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $data_inicio = $_POST['data_inicio'];
         $fim_pacote = $_POST['fim_pacote'];
@@ -43,9 +42,9 @@
         $destino_id_destino = $_POST['destino_id_destino'];
         $id = $_POST['id'];
 
-        alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $id); // Chama a função com os valores do formulário
+        alterarPacote($data_inicio, $fim_pacote, $valor, $destino_id_destino, $id); 
     } else {
-        $pacote = consultaPacote($_GET['id']); // Consulta o pacote com base no ID recebido via GET
+        $pacote = consultaPacote($_GET['id']); 
     }
 ?>
 
@@ -53,7 +52,7 @@
 
 <form method="post">
 
-    <!-- Campo oculto para o ID do Pacote -->
+    
     <input type="hidden" name="id" value="<?= $pacote['idpacotes'] ?>">
 
     <div class="mb-3">
@@ -76,7 +75,7 @@
         <input type="number" id="destino_id_destino" name="destino_id_destino" class="form-control" value="<?= $pacote['destino_id_destino'] ?>" required>
     </div>
 
-    <!-- Campo referente ao "ID do Cliente" foi removido -->
+    
 
     <button type="submit" class="btn btn-primary">Salvar</button>
     <button type="button" class="btn btn-secondary" onclick="history.back();">Voltar</button>

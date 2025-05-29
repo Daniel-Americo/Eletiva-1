@@ -4,10 +4,10 @@
         try {
             $nome = $_POST['nome'];
             $email = $_POST['email'];
-            $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT); //passwordhash recebe a senha, passwordbcrypt incriptografa
+            $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT); 
 
-            $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)"); //prepara o banco para receber os dados nas variaveis
-            if($stmt->execute([$nome, $email, $senha])){//insere os dados ao banco pelo vetor sempre na ordem que certa dos parametros
+            $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
+            if($stmt->execute([$nome, $email, $senha])){
                 header("location: index.php?cadastro=true");
                
             }

@@ -1,19 +1,19 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para buscar os pacotes no banco de dados
+    
     function retornaPacotes() {
         require("conexao.php");
         try {
             $sql = "SELECT * FROM pacotes";
-            $stmt = $pdo->query($sql); // Consulta todos os registros
-            return $stmt->fetchAll(); // Retorna como array
+            $stmt = $pdo->query($sql); 
+            return $stmt->fetchAll(); 
         } catch (Exception $e) {
             die("Erro ao consultar os pacotes: " . $e->getMessage());
         }
     }
 
-    $pacotes = retornaPacotes(); // Obtém os pacotes do banco
+    $pacotes = retornaPacotes(); 
 ?>
 
 <h2>Pacotes</h2>
