@@ -1,27 +1,31 @@
 <?php
-  session_start();
-  if(!$_SESSION['acesso']){
+session_start();
+if(!$_SESSION['acesso']){
     header("location: index.php?mensagem=acesso_negado");
-  }
-  function retornarProdutos(){
-    require("conexao.php");
+}
+
+function retornarProdutos(){
+    require("conexao.php"); // Certifique-se de que conexao.php está correto e funcionando.
     try {
+        // CORREÇÃO: Usando 'produto' (singular) conforme seu schema SQL
         $sql = "SELECT P.*, c.nome as nome_categoria
-        from produtos p
+        from produto p
         inner join categoria c on c.id = p.categoria_id";
         $stmt = $pdo -> query($sql);
         return $stmt->fetchAll();
     } catch(Exception $e) {
         die("Erro ao consultar produtos: ". $e->GetMessage());
     }
-  }
-  $produtos = retornarProdutos();
+}
+$produtos = retornarProdutos();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Relatório de Produtos</title>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <style>
         /* Estilo normal (tela) */
         body {
@@ -58,14 +62,13 @@
 
         /* Seu CSS original */
         .titulo { text-align: center; font-size: 18px; font-weight: bold; }
-        .tabela { width: 100%; border-collapse: collapse; 15px; }
+        .tabela { width: 100%; border-collapse: collapse; /* Removido o '15px;' aqui, era um erro de sintaxe */ }
         .tabela th, .tabela td { border: 1px solid #000; padding: 6px 10px; text-align: left; }
         .tabela th { background-color: #f0f0f0; }
     </style>
 </head>
 <body>
 
-    <!-- Botão para impressão (não aparece no PDF) window.print() faz não aparecer   -->
     <button class="print-button no-print" onclick="window.print()">Imprimir / Salvar como PDF</button>
 
     <div class="titulo">Relatório de Produtos</div>
@@ -84,6 +87,7 @@
         </thead>
         <tbody>
             <?php
+                // CORREÇÃO: Usando a sintaxe alternativa do foreach corretamente
                 foreach($produtos as $p):
             ?>
             <tr>
@@ -95,11 +99,22 @@
             <?php
                 endforeach;
             ?>
-            <!-- Adicione mais linhas dinamicamente com PHP -->
         </tbody>
     </table>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#tabela').DataTable({
+                "language": {
+                    // Este é o caminho crucial para o arquivo de idioma Português do Brasil.
+                    // O número da versão (1.13.4) deve corresponder à versão do seu DataTables.
+                    "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
+                }
+            });
+        });
+
         // Opcional: Configuração para melhor experiência de impressão
         function beforePrint() {
             console.log("Preparando para impressão...");
