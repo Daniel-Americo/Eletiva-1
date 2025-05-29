@@ -2,9 +2,9 @@
     require_once("cabecalho.php");
     require_once("conexao.php");
 
-    // Verifica se o ID do cliente foi passado via GET
-    if (isset($_GET['id']) && !empty($_GET['id'])) {
-        $id = $_GET['id'];
+    // Verifica se o ID do cliente foi passado via POST
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = $_POST['id'];
 
         // Busca os dados do cliente no banco
         try {
@@ -13,7 +13,7 @@
             $stmt->execute([$id]);
             $cliente = $stmt->fetch(); // Retorna os dados do cliente
         } catch (Exception $e) {
-            die("Erro ao buscar cliente: " . $e->getMessage());
+            die("Erro ao buscar cliente: " . $e->POSTMessage());
         }
     } else {
         die("ID do cliente não fornecido!");
@@ -40,7 +40,7 @@
                 exit();
             }
         } catch (Exception $e) {
-            die("Erro ao atualizar cliente: " . $e->getMessage());
+            die("Erro ao atualizar cliente: " . $e->POSTMessage());
         }
     }
 ?>
