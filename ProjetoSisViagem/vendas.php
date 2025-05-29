@@ -38,7 +38,7 @@
 <h2>Vendas Registradas</h2>
 <a href="nova_venda.php" class="btn btn-success mb-3">Nova Venda</a>
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped" id="tabela">
     <thead>
         <tr>
             <th>ID Venda</th>

@@ -1,19 +1,18 @@
 <?php
     require_once("cabecalho.php");
-    require("conexao.php"); // Inclui a conexão com o banco de dados
+    require("conexao.php"); 
 
-    // Função para buscar os destinos
+
     function retornaDestinos($pdo) {
         try {
-            $sql = "SELECT * FROM destinos"; // Consulta a tabela destino
-            $stmt = $pdo->query($sql); // Executa a consulta
-            return $stmt->fetchAll(); // Retorna os dados como array
+            $sql = "SELECT * FROM destinos"; 
+            $stmt = $pdo->query($sql); 
+            return $stmt->fetchAll(); 
         } catch (Exception $e) {
             die("Erro ao consultar os destinos: " . $e->getMessage());
         }
     }
 
-    // Função para excluir um destino
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_destino'])) {
         $id_destino = $_POST['id_destino'];
 
@@ -21,12 +20,12 @@
             $sql = "DELETE FROM destinos WHERE id_destinos = ?";
             $stmt = $pdo->prepare($sql);
             if ($stmt->execute([$id_destino])) {
-                // manda para a pagina destinos se a exclusao der certo
+
                 header('Location: destinos.php?exclusao=true');
                 exit;
             } else {
-                // manda para a pagina destinos se der errado com a mensagem
-                header('Location: destinos.php?exclusao=false'); // Remove o espaço extra
+
+                header('Location: destinos.php?exclusao=false'); 
                 exit;
             }
         } catch (Exception $e) {
@@ -34,14 +33,14 @@
         }
     }
 
-    // Busca os destinos no banco
+
     $destinos = retornaDestinos($pdo);
 ?>
 
 <h2>Consultar Destinos</h2>
 
 <?php
-    // Mensagem de feedback para exclusão
+
     if (isset($_GET['exclusao'])) {
         if ($_GET['exclusao'] === 'true') {
             echo '<p class="text-success">Destino excluído com sucesso!</p>';

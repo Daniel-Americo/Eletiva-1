@@ -18,7 +18,7 @@
 <h2>Destinos</h2>
 <a href="novo_destino.php" class="btn btn-success mb-3">Novo Destino</a>
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped" id= "tabela">
     <thead>
         <tr>
             <th>ID</th>

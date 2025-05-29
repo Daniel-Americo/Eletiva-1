@@ -18,7 +18,7 @@
 <h2>Clientes</h2>
 <a href="novo_cliente.php" class="btn btn-success mb-3">Novo Cliente</a>
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped" id="tabela">
     <thead>
         <tr>
             <th>ID</th>

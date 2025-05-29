@@ -39,7 +39,7 @@
     }
 ?>
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped" id="tabela">
     <thead>
         <tr>
             <th>ID Pacote</th>
