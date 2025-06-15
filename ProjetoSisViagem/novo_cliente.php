@@ -1,27 +1,26 @@
 <?php
     require_once("cabecalho.php");
 
-    // Função para inserir um novo cliente no banco de dados
     function inserirCliente($nome, $email, $tel, $cpf, $rg, $datanascimento) {
-        require("conexao.php"); // Inclui a conexão com o banco de dados
+        require("conexao.php"); 
         try {
-            // Comando SQL para inserir um cliente
+            
             $sql = "INSERT INTO clientes (nome, email, tel, cpf, rg, datanascimento) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
 
-            // Executa a consulta e verifica o resultado
+           
             if ($stmt->execute([$nome, $email, $tel, $cpf, $rg, $datanascimento])) {
-                header('location: clientes.php?cadastro=true'); // Redireciona em caso de sucesso
+                header('location: clientes.php?cadastro=true'); 
             } else {
-                header('location: clientes.php?cadastro=false'); // Redireciona em caso de erro
+                header('location: clientes.php?cadastro=false');
             }
         } catch (Exception $e) {
-            // Exibe mensagem de erro em caso de falha
+
             die("Erro ao inserir cliente: " . $e->getMessage());
         }
     }
 
-    //Verifica se o formulário foi enviado com o método POST
+
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
@@ -30,7 +29,6 @@
         $rg = $_POST['rg'];
         $datanascimento = $_POST['datanascimento'];
 
-        //Chama a função para inserir o cliente no banco de dados
         inserirCliente($nome, $email, $tel, $cpf, $rg, $datanascimento);
     }
 ?>

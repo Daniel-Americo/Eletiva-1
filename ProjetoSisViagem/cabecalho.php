@@ -1,5 +1,7 @@
 <?php
-  session_start();
+  if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
   if(!$_SESSION['acesso']){
     header("location: index.php?mensagem=acesso_negado");
   }
@@ -31,11 +33,15 @@
               <a class="nav-link" href="pacotes.php">Pacotes</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="vendas.php">Vendas</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="clientes.php">Clientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="vendas.php">Vendas</a>
+              <a class="nav-link" href="dashboard.php">Dashboard</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="alterar_dados.php">Alterar Dados</a>
             </li>

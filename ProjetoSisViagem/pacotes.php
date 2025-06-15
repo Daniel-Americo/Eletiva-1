@@ -1,43 +1,39 @@
 <?php
-    require_once("cabecalho.php");
+require_once("cabecalho.php");
+require_once("conexao.php");
 
-    
-    function retornaPacotes() {
-        require("conexao.php");
-        try {
-            $sql = "SELECT * FROM pacotes";
-            $stmt = $pdo->query($sql); 
-            return $stmt->fetchAll(); 
-        } catch (Exception $e) {
-            die("Erro ao consultar os pacotes: " . $e->getMessage());
-        }
+
+function retornaPacotes($pdo) {
+    try {
+        $sql = "SELECT * FROM pacotes";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        die("Erro ao consultar os pacotes: " . $e->getMessage());
     }
+}
 
-    $pacotes = retornaPacotes(); 
+$pacotes = retornaPacotes($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastro'])) {
+    $_SESSION['mensagem'] = $_POST['cadastro'] === "true" ? "Registro salvo com sucesso!" : "Erro ao inserir o registro!";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edicao'])) {
+    $_SESSION['mensagem'] = $_POST['edicao'] === "true" ? "Registro alterado com sucesso!" : "Erro ao alterar o registro!";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['exclusao'])) {
+    $_SESSION['mensagem'] = $_POST['exclusao'] === "true" ? "Registro excluído com sucesso!" : "Erro ao excluir o registro!";
+}
 ?>
 
 <h2>Pacotes</h2>
 <a href="novo_pacote.php" class="btn btn-success mb-3">Novo Pacote</a>
 
-<?php
-    if (isset($_GET['cadastro']) && $_GET['cadastro'] == true) {
-        echo '<p class="text-success">Registro salvo com sucesso!</p>';
-    } elseif (isset($_GET['cadastro']) && $_GET['cadastro'] == false) {
-        echo '<p class="text-danger">Erro ao inserir o registro!</p>';
-    }
-
-    if (isset($_GET['edicao']) && $_GET['edicao'] == true) {
-        echo '<p class="text-success">Registro alterado com sucesso!</p>';
-    } elseif (isset($_GET['edicao']) && $_GET['edicao'] == false) {
-        echo '<p class="text-danger">Erro ao alterar o registro!</p>';
-    }
-
-    if (isset($_GET['exclusao']) && $_GET['exclusao'] == true) {
-        echo '<p class="text-success">Registro excluído com sucesso!</p>';
-    } elseif (isset($_GET['exclusao']) && $_GET['exclusao'] == false) {
-        echo '<p class="text-danger">Erro ao excluir o registro!</p>';
-    }
-?>
+<?php if (isset($_SESSION['mensagem'])) : ?>
+    <div class="alert alert-info"><?= $_SESSION['mensagem']; unset($_SESSION['mensagem']); ?></div>
+<?php endif; ?>
 
 <table class="table table-hover table-striped" id="tabela">
     <thead>
@@ -59,14 +55,18 @@
                 <td><?= number_format($p['valor'], 2, ',', '.') ?></td>
                 <td><?= $p['destino_id_destino'] ?></td>
                 <td>
-                    <a href="editar_pacote.php?id=<?= $p['idpacotes'] ?>" class="btn btn-warning">Editar</a>
-                    <a href="consultar_pacote.php?id=<?= $p['idpacotes'] ?>" class="btn btn-info">Consultar</a>
+                    <form action="editar_pacote.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id_pacote" value="<?= $p['idpacotes'] ?>">
+                        <button type="submit" class="btn btn-warning">Editar</button>
+                    </form>
+                    <form action="consultar_pacote.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id_pacote" value="<?= $p['idpacotes'] ?>">
+                        <button type="submit" class="btn btn-info">Consultar</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?php
-    require_once("rodape.php");
-?>
+<?php require_once("rodape.php"); ?>

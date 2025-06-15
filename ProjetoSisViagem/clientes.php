@@ -1,21 +1,26 @@
 <?php
-    require_once("cabecalho.php");
+require_once("cabecalho.php");
 
-    function retornaClientes() {
-        require("conexao.php");
-        try {
-            $sql = "SELECT * FROM clientes";
-            $stmt = $pdo->query($sql); // Busca todos os clientes
-            return $stmt->fetchAll(); // Retorna os clientes em formato de array
-        } catch (Exception $e) {
-            die("Erro ao consultar os clientes: " . $e->getMessage());
-        }
+function retornaClientes() {
+    require("conexao.php");
+    try {
+        $sql = "SELECT * FROM clientes";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        die("Erro ao consultar os clientes: " . $e->getMessage());
     }
+}
 
-    $clientes = retornaClientes(); // Obtém os clientes do banco de dados
+$clientes = retornaClientes();
 ?>
 
 <h2>Clientes</h2>
+
+<?php if (isset($_GET['edicao']) && $_GET['edicao'] === 'sucesso'): ?>
+    <div class="alert alert-success">Cliente atualizado com sucesso!</div>
+<?php endif; ?>
+
 <a href="novo_cliente.php" class="btn btn-success mb-3">Novo Cliente</a>
 
 <table class="table table-hover table-striped" id="tabela">
@@ -42,14 +47,18 @@
                 <td><?= date("d/m/Y", strtotime($c['datanascimento'])) ?></td>
                 <td><?= $c['email'] ?></td>
                 <td>
-                    <a href="editar_cliente.php?id=<?= $c['idclientes'] ?>" class="btn btn-warning">Editar</a>
-                    <a href="consultar_cliente.php?id=<?= $c['idclientes'] ?>" class="btn btn-info">Consultar</a>
+                    <form action="editar_cliente.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $c['idclientes'] ?>">
+                        <button type="submit" class="btn btn-warning">Editar</button>
+                    </form>
+                    <form action="consultar_cliente.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $c['idclientes'] ?>">
+                        <button type="submit" class="btn btn-info">Consultar</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?php
-    require_once("rodape.php");
-?>
+<?php require_once("rodape.php"); ?>
