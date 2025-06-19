@@ -1,29 +1,30 @@
 <?php
-    require_once("cabecalho.php");
+function inserirDestino($estado, $cidade, $pais) {
+    require("conexao.php"); 
+    try {
+        $sql = "INSERT INTO destinos (estado, cidade, pais) VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([$estado, $cidade, $pais]);
+    } catch (Exception $e) {
+        die("Erro ao inserir destino: " . $e->getMessage());
+    }
+}
 
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $estado = $_POST['estado'];
+    $cidade = $_POST['cidade'];
+    $pais = $_POST['pais'];
     
-    function inserirDestino($estado, $cidade, $pais) {
-        require("conexao.php");
-        try {
-            $sql = "INSERT INTO destinos (estado, cidade, pais) VALUES (?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$estado, $cidade, $pais])) {
-                header('location: destinos.php?cadastro=true'); 
-            } else {
-                header('location: destinos.php?cadastro=false'); 
-            }
-        } catch (Exception $e) {
-            die("Erro ao inserir destino: " . $e->getMessage());
-        }
+    if (inserirDestino($estado, $cidade, $pais)) {
+        header('location: destinos.php?cadastro=true'); 
+        exit();
+    } else {
+        header('location: destinos.php?cadastro=false'); 
+        exit();
     }
+}
 
- 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $estado = $_POST['estado'];
-        $cidade = $_POST['cidade'];
-        $pais = $_POST['pais'];
-        inserirDestino($estado, $cidade, $pais);
-    }
+require_once("cabecalho.php");
 ?>
 
 <h2>Novo Destino</h2>
@@ -49,5 +50,5 @@
 </form>
 
 <?php
-    require_once("rodape.php");
+require_once("rodape.php");
 ?>

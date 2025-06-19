@@ -6,7 +6,7 @@ function retornaDestinos() {
     try {
         $sql = "SELECT * FROM destinos";
         $stmt = $pdo->query($sql);
-        return $stmt->fetchAll(); // Retorna os registros
+        return $stmt->fetchAll();
     } catch (Exception $e) {
         die("Erro ao consultar os destinos: " . $e->getMessage());
     }
@@ -31,18 +31,16 @@ $destinos = retornaDestinos();
     <tbody>
         <?php foreach ($destinos as $d): ?>
             <tr>
-                <td><?= $d['id_destinos'] ?></td>
-                <td><?= $d['estado'] ?></td>
-                <td><?= $d['cidade'] ?></td>
-                <td><?= $d['pais'] ?></td>
+                <td><?= htmlspecialchars($d['id_destinos']) ?></td>
+                <td><?= htmlspecialchars($d['estado']) ?></td>
+                <td><?= htmlspecialchars($d['cidade']) ?></td>
+                <td><?= htmlspecialchars($d['pais']) ?></td>
                 <td>
-                    <form action="editar_destino.php" method="post" style="display:inline;">
-                        <input type="hidden" name="id_destino" value="<?= $d['id_destinos'] ?>">
-                        <button type="submit" class="btn btn-warning">Editar</button>
-                    </form>
+                    <a href="editar_destino.php?id=<?= htmlspecialchars($d['id_destinos']) ?>" class="btn btn-warning btn-sm">Editar</a>
+                    
                     <form action="consultar_destino.php" method="post" style="display:inline;">
-                        <input type="hidden" name="id_destino" value="<?= $d['id_destinos'] ?>">
-                        <button type="submit" class="btn btn-info">Consultar</button>
+                        <input type="hidden" name="id_destino" value="<?= htmlspecialchars($d['id_destinos']) ?>">
+                        <button type="submit" class="btn btn-info btn-sm">Consultar</button>
                     </form>
                 </td>
             </tr>
