@@ -103,4 +103,4 @@ require_once("cabecalho.php");
     <button type="button" class="btn btn-secondary" onclick="history.back();">Voltar</button>
 </form>
 
-<?php require_once("rodape.php"); ?>
+<?php require_once("rodape.php"); ?>    
