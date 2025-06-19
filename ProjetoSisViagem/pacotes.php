@@ -4,7 +4,18 @@ require_once("conexao.php");
 
 function retornaPacotes($pdo) {
     try {
-        $sql = "SELECT * FROM pacotes";
+        $sql = "SELECT 
+                    p.idpacotes, 
+                    p.data_inicio, 
+                    p.fim_pacote, 
+                    p.valor, 
+                    p.destino_id_destino, 
+                    d.cidade AS destino_cidade
+                FROM 
+                    pacotes p
+                JOIN 
+                    destinos d ON p.destino_id_destino = d.id_destinos
+                ORDER BY p.idpacotes DESC";
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
@@ -13,7 +24,6 @@ function retornaPacotes($pdo) {
 }
 
 $pacotes = retornaPacotes($pdo);
-
 ?>
 
 <div class="container mt-4">
@@ -39,7 +49,7 @@ $pacotes = retornaPacotes($pdo);
                 <th>Data Início</th>
                 <th>Data Fim</th>
                 <th>Valor</th>
-                <th>Destino ID</th>
+                <th>Destino</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -50,7 +60,7 @@ $pacotes = retornaPacotes($pdo);
                     <td><?= htmlspecialchars(date("d/m/Y", strtotime($p['data_inicio']))) ?></td>
                     <td><?= htmlspecialchars(date("d/m/Y", strtotime($p['fim_pacote']))) ?></td>
                     <td>R$ <?= htmlspecialchars(number_format($p['valor'], 2, ',', '.')) ?></td>
-                    <td><?= htmlspecialchars($p['destino_id_destino']) ?></td>
+                    <td><?= htmlspecialchars($p['destino_cidade']) ?></td>
                     <td>
                         <a href="editar_pacote.php?id=<?= htmlspecialchars($p['idpacotes']) ?>" class="btn btn-warning btn-sm">Editar</a>
                         <a href="consultar_pacote.php?id=<?= htmlspecialchars($p['idpacotes']) ?>" class="btn btn-info btn-sm">Consultar</a>
